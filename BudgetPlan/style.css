@@ -1,0 +1,145 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.header {
+    position: relative;
+    width: 100vw;
+    height: 35vh;
+    text-align: center;
+    color: white;
+}
+
+.header img {
+    width: 100vw;
+    height: 35vh;
+}
+
+.header-content {
+    position: absolute;
+    top: 3%;
+    left: calc(50vw - 120px);
+}
+
+#month {
+    margin-bottom: 5%;
+}
+
+#budget {
+    font-size: 2rem;
+    margin: 0;
+    margin-bottom: 5%;
+}
+
+.hdr-cntnt-2 {
+    width: 220px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 0.8rem;
+}
+
+.black {
+    color: black;
+}
+
+.hdr-inc {
+    background-color: rgb(5, 207, 5);
+    margin-bottom: 3%;
+}
+
+.hdr-exp {
+    background-color: rgb(255, 45, 45);
+}
+
+.form {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-top: 7px;
+}
+
+#describe {
+    width: 280px;
+}
+
+#value {
+    width: 80px;
+}
+
+#red {
+    display: none;
+}
+
+.content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+tr {
+    line-height: 40px;
+    border-top: 1px solid gray;
+}
+
+tr:last-child {
+    border-bottom: 1px solid gray;
+}
+
+td:first-child {
+    padding-right: 80px;
+    text-align: left;
+}
+
+td:last-child button {
+    display: none;
+}
+
+tr:hover button {
+    display: inline;
+}
+
+#income td:nth-child(2) {
+    color: rgb(5, 207, 5);
+    text-align: right;
+}
+
+#expenses td:nth-child(2) {
+    color: rgb(255, 45, 45);
+    text-align: right;
+}
+
+.inc-div {
+    margin-right: 5%;
+}
+
+.inc-div p {
+    font-size: 1.4rem;
+    color: rgb(5, 207, 5);
+}
+
+.exp-div p {
+    font-size: 1.4rem;
+    color: rgb(255, 45, 45);
+}
+
+@media only screen and (max-width: 720px) {
+    .content {
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .inc-div {
+        margin-right: 0;
+    }
+}
