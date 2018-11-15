@@ -14,6 +14,7 @@ const redIcon = $id("red");
 const tblIncome = $id("income");
 const tblExpenses = $id("expenses");
 const perc = document.getElementById("perc");
+let container = $id("container").innerHTML;
 
 function setDate() {
     const date = $id("date");
@@ -76,11 +77,11 @@ function addRow(table, sign, val) {
 
 function setValue(elem, val, sign) {
     if(sign === "sum" && val < 0) {
-        elem.innerHTML = "- "+Number(-val).toFixed(2);
+        elem.innerHTML = "-"+Number(-val).toFixed(2);
     } else if(sign === "sum") {
         elem.innerHTML = "+ "+Number(val).toFixed(2);
     } else {
-        if(sign === "- ") {
+        if(sign === "-") {
             elem.innerHTML = sign+Number(val).toFixed(2);
             perc.innerHTML = percent(val);
         }
@@ -90,38 +91,51 @@ function setValue(elem, val, sign) {
 
 function dltBtn(elem, sign, val) {
     elem.parentNode.parentNode.remove();
-    if(sign === "+ ") {
+    if(sign === "+") {
         incSum -= val;
-        setValue(incHdr, incSum, "+ ");
+        setValue(incHdr, incSum, "+");
         setValue(budget, incSum-expSum, "sum");
         perc.innerHTML = percent(expSum);
     } else {
         expSum -= val;
-        setValue(expHdr, expSum, "- ");
+        setValue(expHdr, expSum, "-");
         setValue(budget, incSum-expSum, "sum");
         perc.innerHTML = percent(expSum);
     }
+    percentTable();
 }
 
 function percent(val) {
-    let num = (val/incSum*100).toFixed(0);
+    let num = (val/incSum*100).toFixed(1);
     if(isNaN(num)) {
         return "0%";
+    } else if(num === "Infinity") {
+        return "100%";
     } else {
         return num + "%";
+    }
+}
+
+function percentTable() {
+    const tblExpenses = $id("expenses");
+    for(let i = 0; i < tblExpenses.childElementCount; i++) {
+        let val = tblExpenses.children[i].children[1].innerHTML;
+        tblExpenses.children[i].children[2].innerHTML = percent(Number(val)*-1);
     }
 }
 
 setDate();
 slct();
 greenIcon.addEventListener("click", function() {
-    tableRow(tblIncome, "+ ");
-    setValue(incHdr, incSum, "+ ");
+    tableRow(tblIncome, "+");
+    setValue(incHdr, incSum, "+");
     setValue(budget, incSum-expSum, "sum");
+    perc.innerHTML = percent(expSum);
+    percentTable();
 });
 redIcon.addEventListener("click", function() {
-    tableRow(tblExpenses, "- ");
-    setValue(expHdr, expSum, "- ");
+    tableRow(tblExpenses, "-");
+    setValue(expHdr, expSum, "-");
     setValue(budget, incSum-expSum, "sum");
 });
 })();
